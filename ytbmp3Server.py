@@ -31,10 +31,11 @@ class YtbMP3Server:
             for fileName in fileNames:
                 if os.path.splitext(fileName)[1] == '.mp4' or os.path.splitext(fileName)[1] == '.mkv':
                     print fileName
+                    pattern = re.compile(r'$(')
                     downloadedFiles.append(fileName)
 
         for file in downloadedFiles:
-            os.popen('lame -b ' + self.b + ' ' + file)
+            os.popen('lame -b ' + self.b + ' ' + '"' + file + '"')
 
 
 if __name__ == '__main__':
