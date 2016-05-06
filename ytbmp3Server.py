@@ -2,7 +2,7 @@ import os
 import re
 import sys, getopt
 
-class YtbMP3Server:
+class YtbAudioServer:
     """docstring for YtbMP3Server"""
     def __init__(self):
         self.addresses = ''
@@ -18,32 +18,16 @@ class YtbMP3Server:
                 self.proxy = v
 
         if self.proxy == '':
-            dl = os.popen('youtube-dl --audio-quality 0 ' + self.addresses).read()
+            dl = os.popen('youtube-dl -x --audio-quality 0 ' + self.addresses).read()
         else:
-            dl = os.popen('youtube-dl --audio-quality 0 --proxy ' + self.proxy + self.addresses).read()
+            # dl = os.popen('youtube-dl -x --audio-quality 0 --proxy ' + self.proxy + self.addresses).readline()
+            dl = os.popen('youtube-dl --proxy ' + '"' + self.proxy + '"' + self.addresses).read()
 
-        downloadedFiles = []
-        # for dirPath, dirNames, fileNames in os.walk(os.path.dirname(os.path.realpath(__file__))):
-        fileNames = os.listdir(self.path)
-        for fileName in fileNames:
-            if os.path.splitext(fileName)[1] == '.mp4' or os.path.splitext(fileName)[1] == '.mkv':
-                downloadedFiles.append(fileName)
+        # self.HTTPServer()
 
-        l = float(len(downloadedFiles))
-        if int(l) == 0:
-            return
-
-        c = 0
-        for file in downloadedFiles:
-            os.popen('rm ' + '"' + file + '"')
-            c += 1
-            print str(c / l * 100) + '%   ' + '(' + str(c) + '/' + str(int(l)) + ')'
-
-        self.HTTPServer()
-
-    def HTTPServer():
+    def HTTPServer(self):
         try:
-            os.popen('python -m SimpleHTTPServer 8080 &')
+            os.popen('python -m SimpleHTTPServer 23333 &')
         except:
             pass
 
@@ -52,5 +36,5 @@ if __name__ == '__main__':
     if len(sys.argv) < 2:
         print u'Usage: python ytbmp3Server.py [OPTIONS] URL [URL ...]'
     else:
-        YTB = YtbMP3Server()
+        YTB = YtbAudioServer()
         YTB.download(opts, args)

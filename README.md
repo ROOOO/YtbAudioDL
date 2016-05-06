@@ -1,4 +1,5 @@
-# Download Youtube videos and convert them to MP3
+# DISCRIPTION
+ Download Youtube videos and convert them to Audio Format On your own Server. Download and enjoy it!
 ## Required
 - youtube-dl
 - Python 2.x
@@ -17,7 +18,7 @@
  - Server
   -p         HTTP/HTTPS proxy.(example: -p http://x.x.x.x:xxxx)
  - Local
-  -p         Server port(default 8080)
+  -p         Server port(default 23333)
 
 ## DISCRIPTION
  1. Run `ytbmp3Server` on server.
