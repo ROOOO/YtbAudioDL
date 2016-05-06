@@ -30,8 +30,16 @@ class YtbMP3Server:
                 if os.path.splitext(fileName)[1] == '.mp4' or os.path.splitext(fileName)[1] == '.mkv':
                     downloadedFiles.append(fileName)
 
+        l = float(len(downloadedFiles))
+        if int(l) == 0:
+            return
+
+        c = 0
         for file in downloadedFiles:
             os.popen('lame -b ' + self.b + ' ' + '"' + file + '"')
+            c += 1
+            print str(c / l * 100) + '%   ' + '(' + str(c) + '/' + str(l) + ')'
+
 
 
 if __name__ == '__main__':
