@@ -39,7 +39,7 @@ class YtbMP3Server:
 
 if __name__ == '__main__':
     opts, args = getopt.getopt(sys.argv[1:], 'p:b:')
-    if len(sys.argv) < 2 or opts == []:
+    if len(sys.argv) < 2:
         print u'Usage: python ytbmp3Server.py [OPTIONS] URL [URL ...]'
     else:
         YTB = YtbMP3Server()
