@@ -8,6 +8,7 @@ class YtbMP3Server:
         self.addresses = ''
         self.proxy = ''
         self.b = '320'
+        self.path = os.path.dirname(os.path.realpath(__file__))
 
     def download(self, opts, args):
         for address in args:
@@ -25,10 +26,11 @@ class YtbMP3Server:
             dl = os.popen('youtube-dl --proxy ' + self.proxy + self.addresses).read()
 
         downloadedFiles = []
-        for dirPath, dirNames, fileNames in os.walk(os.path.dirname(os.path.realpath(__file__))):
-            for fileName in fileNames:
-                if os.path.splitext(fileName)[1] == '.mp4' or os.path.splitext(fileName)[1] == '.mkv':
-                    downloadedFiles.append(fileName)
+        # for dirPath, dirNames, fileNames in os.walk(os.path.dirname(os.path.realpath(__file__))):
+        fileNames = os.listdir(path)
+        for fileName in fileNames:
+            if os.path.splitext(fileName)[1] == '.mp4' or os.path.splitext(fileName)[1] == '.mkv':
+                downloadedFiles.append(fileName)
 
         l = float(len(downloadedFiles))
         if int(l) == 0:
@@ -37,8 +39,10 @@ class YtbMP3Server:
         c = 0
         for file in downloadedFiles:
             os.popen('lame -b ' + self.b + ' ' + '"' + file + '"')
+            os.popen('rm ' + '"' + file + '"')
             c += 1
             print str(c / l * 100) + '%   ' + '(' + str(c) + '/' + str(l) + ')'
+
 
 
 
