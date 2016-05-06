@@ -19,19 +19,15 @@ class YtbMP3Server:
             elif op == '-b':
                 slef.b = v
 
-        print self.proxy
         if self.proxy == '':
             dl = os.popen('youtube-dl' + self.addresses).read()
         else:
             dl = os.popen('youtube-dl --proxy ' + self.proxy + self.addresses).read()
-            # print os.path.dirname(os.path.realpath(__file__))
 
         downloadedFiles = []
         for dirPath, dirNames, fileNames in os.walk(os.path.dirname(os.path.realpath(__file__))):
             for fileName in fileNames:
                 if os.path.splitext(fileName)[1] == '.mp4' or os.path.splitext(fileName)[1] == '.mkv':
-                    print fileName
-                    pattern = re.compile(r'$(')
                     downloadedFiles.append(fileName)
 
         for file in downloadedFiles:
