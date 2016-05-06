@@ -3,12 +3,20 @@
 - youtube-dl
 - Lame
 - Python 2.x
+- ffmepg(optional)
 
-## Command
+## Usage
  - On Server Side
-    ytbmp3Server URL
+    python ytbmp3Server.py [OPTIONS] URL [URL ...]
  - On local Side
-    ytbmp3Local [OPTIONS] IP
+    python ytbmp3Local.py [OPTIONS] IP
+
+### Notes
+ - URL can be a playlist.
+
+## OPTIONS
+ - Server
+  -p            HTTP/HTTPS proxy.(example: -p http://x.x.x.x:xxxx)
 
 ## DISCRIPTION
  1. Run `ytbmp3Server` on server.
