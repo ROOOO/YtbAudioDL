@@ -27,7 +27,7 @@ class YtbMP3Server:
 
         downloadedFiles = []
         # for dirPath, dirNames, fileNames in os.walk(os.path.dirname(os.path.realpath(__file__))):
-        fileNames = os.listdir(path)
+        fileNames = os.listdir(self.path)
         for fileName in fileNames:
             if os.path.splitext(fileName)[1] == '.mp4' or os.path.splitext(fileName)[1] == '.mkv':
                 downloadedFiles.append(fileName)
@@ -41,7 +41,7 @@ class YtbMP3Server:
             os.popen('lame -b ' + self.b + ' ' + '"' + file + '"')
             os.popen('rm ' + '"' + file + '"')
             c += 1
-            print str(c / l * 100) + '%   ' + '(' + str(c) + '/' + str(l) + ')'
+            print str(c / l * 100) + '%   ' + '(' + str(c) + '/' + str(int(l)) + ')'
 
 
 
