@@ -1,9 +1,8 @@
 # Download Youtube videos and convert them to MP3
 ## Required
 - youtube-dl
-- Lame
 - Python 2.x
-- ffmepg(optional)
+- ffmepg
 
 ## Usage
  - On Server Side
@@ -17,7 +16,8 @@
 ## OPTIONS
  - Server
   -p         HTTP/HTTPS proxy.(example: -p http://x.x.x.x:xxxx)
-  -b         set the bitrate, default 320 kbps
+ - Local
+  -p         Server port(default 8080)
 
 ## DISCRIPTION
  1. Run `ytbmp3Server` on server.
