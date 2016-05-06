@@ -16,7 +16,8 @@
 
 ## OPTIONS
  - Server
-  -p            HTTP/HTTPS proxy.(example: -p http://x.x.x.x:xxxx)
+  -p         HTTP/HTTPS proxy.(example: -p http://x.x.x.x:xxxx)
+  -b         set the bitrate, default 320 kbps
 
 ## DISCRIPTION
  1. Run `ytbmp3Server` on server.
