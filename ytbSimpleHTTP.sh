@@ -1,3 +1,9 @@
 #!/bin/bash
 
-nohup python -m SimpleHTTPServer 23333 &
+if [ $# -gt 0 ]; then
+	python -m SimpleHTTPServer $1 &
+	echo 'port: '$1
+else
+	python -m SimpleHTTPServer 23333 &
+	echo 'prot: 23333'
+fi
