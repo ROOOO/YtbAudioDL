@@ -1,7 +1,7 @@
 # DISCRIPTION
  Download Youtube videos and convert them to Audio Format On your own Server. Then, download them easily.
 
-## Required
+## Requirements
 - youtube-dl
 - Python 2.x
 - ffmepg

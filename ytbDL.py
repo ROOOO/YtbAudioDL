@@ -33,7 +33,7 @@ class YtbMP3Local:
     pattern = re.compile(r'<li><a href="(.*?)">(.*?)</a>')
     items = re.findall(pattern, self.html)
     for item in items:
-      if re.split(re.compile(r'\.'), item[1])[1] in self.audioPostfix and item[1] not in self.files:
+      if re.search(re.compile(r'\.'), item[1]) and re.split(re.compile(r'\.'), item[1])[1] in self.audioPostfix and item[1] not in self.files:
         os.popen('wget ' + self.address + '/' + item[0])
 
 if __name__ == '__main__':
