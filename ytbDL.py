@@ -2,6 +2,7 @@ import urllib2
 import getopt
 import sys
 import re
+import os
 
 class YtbMP3Local:
   """docstring for YtbMP3Local"""
@@ -21,8 +22,10 @@ class YtbMP3Local:
     self.html = urllib2.urlopen(self.address).read()
 
   def getAudioFiles(self):
-    pattern = re.compile(r'<li><a href="(.*?)">.*?(aac|vorbis|mp3|m4a|opus|wav|ogg)</a>', re.S)
-    print re.findall(pattern, self.html)
+    pattern = re.compile(r'<li><a href="(.*?)">.*?(aac|vorbis|mp3|m4a|opus|wav|ogg)</a>')
+    items = re.findall(pattern, self.html)
+    for item in items:
+      os.popen('wget ' + self.address + '/' + item[0])
 
 if __name__ == '__main__':
   opts, args = getopt.getopt(sys.argv[1:], 'p:')
