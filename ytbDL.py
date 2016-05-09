@@ -32,9 +32,13 @@ class YtbMP3Local:
   def getAudioFiles(self):
     pattern = re.compile(r'<li><a href="(.*?)">(.*?)</a>')
     items = re.findall(pattern, self.html)
+    l = len(items)
+    c = 0
     for item in items:
+      c += 1
       if re.search(re.compile(r'\.'), item[1]) and re.split(re.compile(r'\.'), item[1])[1] in self.audioPostfix and item[1] not in self.files:
         os.popen('wget ' + self.address + '/' + item[0])
+      print str(int(c / float(l) * 100)) + u'%'
 
 if __name__ == '__main__':
   opts, args = getopt.getopt(sys.argv[1:], 'p:')
