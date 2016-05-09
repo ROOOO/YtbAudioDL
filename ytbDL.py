@@ -14,18 +14,26 @@ class YtbMP3Local:
         if op == '-p':
           self.port = v
     self.address = ':' + self.port
+    self.files = []
 
   def getHTML(self, url):
     self.address = 'http://' + url + self.address
-    print self.address
+    print u'opening ' + self.address
     request = urllib2.Request(self.address)
     self.html = urllib2.urlopen(self.address).read()
+
+  def searchLocalExistsAudioFiles(self):
+    fileNames = os.listdir(os.path.dirname(os.path.realpath(__file__)))
+    for fileName in fileNames:
+      if os.path.splitext(fileName)[1] == '.acc' or os.path.splitext(fileName)[1] == '.vorbis' or os.path.splitext(fileName)[1] == '.mp3' or os.path.splitext(fileName)[1] == '.m4a' or os.path.splitext(fileName)[1] == '.opus' or os.path.splitext(fileName)[1] == '.wav' or os.path.splitext(fileName)[1] == '.ogg':
+        self.files.append(fileName)
 
   def getAudioFiles(self):
     pattern = re.compile(r'<li><a href="(.*?)">.*?(aac|vorbis|mp3|m4a|opus|wav|ogg)</a>')
     items = re.findall(pattern, self.html)
     for item in items:
-      os.popen('wget ' + self.address + '/' + item[0])
+      if item not in self.files:
+        os.popen('wget ' + self.address + '/' + item[0])
 
 if __name__ == '__main__':
   opts, args = getopt.getopt(sys.argv[1:], 'p:')
@@ -34,4 +42,5 @@ if __name__ == '__main__':
   else:
     YTB = YtbMP3Local(opts)
     YTB.getHTML(args[0])
+    YTB.searchLocalExistsAudioFiles()
     YTB.getAudioFiles()
