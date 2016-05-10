@@ -6,6 +6,8 @@
 - Python 2.x
 - ffmepg
 - wget
+- http-server (Python's build-in HTTPServer is unstable)
+ `npm install http-server -g`
 
 ## Usage
  - On Server Side
@@ -21,6 +23,7 @@
   `-x --audio-quality 0` as default args. You can also add youtube-dl build-in OPTIONS if you want.
  - Local
   -p         Server port(default 23333)
+  -o         The directory prefix. (The same as `wget -P`)
 
 ## DISCRIPTION
  1. Run `ytbAudioDL.sh` on server.

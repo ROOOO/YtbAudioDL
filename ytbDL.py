@@ -9,10 +9,13 @@ class YtbMP3Local:
   def __init__(self, opts):
     self.html = ''
     self.port = '23333'
+    self.output = ''
     if opts != []:
       for op, v in opts:
         if op == '-p':
           self.port = v
+        elif op == '-o':
+          self.output = v
     self.address = ':' + self.port
     self.files = []
     self.audioPostfix = ['aac', 'vorbis', 'mp3', 'm4a', 'opus', 'wav', 'ogg']
@@ -30,18 +33,19 @@ class YtbMP3Local:
         self.files.append(fileName)
 
   def getAudioFiles(self):
-    pattern = re.compile(r'<li><a href="(.*?)">(.*?)</a>')
+    pattern = re.compile(r'<a href="(.*?)">(.*?)</a>')
     items = re.findall(pattern, self.html)
     l = len(items)
     c = 0
     for item in items:
       c += 1
       if re.search(re.compile(r'\.'), item[1]) and re.split(re.compile(r'\.'), item[1])[1] in self.audioPostfix and item[1] not in self.files:
-        os.popen('wget ' + self.address + '/' + item[0])
+        # os.popen('wget ' + self.address + '/' + item[0])
+        os.popen('wget -c ' + '-P ' + self.output + ' ' + self.address + '/' + item[0])
       print str(int(c / float(l) * 100)) + u'%'
 
 if __name__ == '__main__':
-  opts, args = getopt.getopt(sys.argv[1:], 'p:')
+  opts, args = getopt.getopt(sys.argv[1:], 'p:o:')
   if len(args) > 1 or args == []:
     print u'Usage: python ytbmp3Local.py [OPTIONS] IP'
   else:
