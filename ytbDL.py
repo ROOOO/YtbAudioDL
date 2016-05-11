@@ -16,12 +16,16 @@ class YtbMP3Local:
           self.port = v
         elif op == '-o':
           self.output = v
-    self.address = ':' + self.port
+    self.address = ':' + self.port + '/'
     self.files = []
     self.audioPostfix = ['aac', 'vorbis', 'mp3', 'm4a', 'opus', 'wav', 'ogg']
 
   def getHTML(self, url):
-    self.address = 'http://' + url + self.address
+    if not re.match(r'http|ftp://', url):
+      self.address = 'http://' + url + self.address
+    else:
+      self.address = url + self.address
+
     print u'opening ' + self.address
     request = urllib2.Request(self.address)
     self.html = urllib2.urlopen(self.address).read()
@@ -41,11 +45,10 @@ class YtbMP3Local:
       c += 1
       if re.search(re.compile(r'\.'), item[1]) and re.split(re.compile(r'\.'), item[1])[1] in self.audioPostfix and item[1] not in self.files:
         # os.popen('wget ' + self.address + '/' + item[0])
-        print self.address + '/' + item[0]
         if self.output != '':
-          os.popen('wget -c ' + '-P ' + self.output + ' ' + self.address + '/' + item[0])
+          os.popen('wget -c ' + '-P ' + self.output + ' ' + self.address + item[0])
         else:
-          os.popen('wget -c ' + self.address + '/' + item[0])
+          os.popen('wget -c ' + self.address + item[0])
       print str(int(c / float(l) * 100)) + u'%'
 
 if __name__ == '__main__':

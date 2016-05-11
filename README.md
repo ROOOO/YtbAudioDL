@@ -13,7 +13,7 @@
  - On Server Side
     sh ytbAudioDL.sh [OPTIONS] URL [URL ...]
  - On Local Side
-    python ytbDL.py [OPTIONS] IP
+    python ytbDL.py [OPTIONS] Protocol://IP
 
 ### Notes
  - URL can be a playlist.
