@@ -31,6 +31,7 @@
 
 ## TODO
  1. Delete audio files which you'd downloaded from your own server.
+ 2. PlayList
 
 ## Release Log
  - v0.1.1
