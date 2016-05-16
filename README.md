@@ -37,6 +37,8 @@
  2. PlayList
 
 ## Release Log
+ - v0.2.1
+  1. fix download bugs.
  - v0.2.0
   1. Get all playlists and choose what you are going to download.
  - v0.1.1
