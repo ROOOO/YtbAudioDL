@@ -16,10 +16,11 @@ from selenium.common.exceptions import TimeoutException
 import platform
 
 class getPlayListURLs:
-  def __init__(self, url):
+  def __init__(self, url, fileName = 'toBeDownload'):
     self.playlistURL = url
     self.urls = []
     self.names = []
+    self.fileName = fileName
 
     sysstr = platform.system()
     if sysstr == 'Linux':
@@ -65,7 +66,7 @@ class getPlayListURLs:
     self.save()
 
   def save(self):
-    file = open('toBeDownload', 'w')
+    file = open(self.fileName, 'w')
     for item in self.urls:
       file.write('https://www.youtube.com' + item + '\n')
     file.close()
@@ -77,7 +78,13 @@ if __name__ == '__main__':
   if not re.match(pattern, html):
     html = prefix + html
 
-  getURL = getPlayListURLs(html)
+  try:
+    sys.argv[2]
+  except:
+    getURL = getPlayListURLs(html)
+  else:
+    getURL = getPlayListURLs(html, sys.argv[2])
+
   getURL.getURLs()
   # if :
   #   print u'Usage: python ytbmp3Local.py [OPTIONS] IP'
