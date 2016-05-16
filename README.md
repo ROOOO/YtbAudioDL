@@ -21,7 +21,7 @@
 
 ## OPTIONS
  - Server
-  `-x --audio-quality 0` as default args. You can also add youtube-dl build-in OPTIONS if you want.
+  `-x --audio-quality 0 --audio-format 'aac'` as default args. You can also add youtube-dl build-in OPTIONS if you want.
   `-a toBeDownload`      Add a list of urls after running the getPlayListURLs.py.
  - Local
   -p         Server port(default 23333)
