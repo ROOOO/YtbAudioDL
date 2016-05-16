@@ -27,7 +27,7 @@ class YtbMP3Local:
       self.address = url + self.address
 
     print u'opening ' + self.address
-    request = urllib2.Request(self.address)
+    # request = urllib2.Request(self.address)
     self.html = urllib2.urlopen(self.address).read()
 
   def searchLocalExistsAudioFiles(self):
