@@ -12,19 +12,16 @@ class YtbMP3Local:
     self.output = ''
     if opts != []:
       for op, v in opts:
-        if op == '-p':
-          self.port = v
-        elif op == '-o':
+        if op == '-o':
           self.output = v
     self.address = ':' + self.port + '/'
     self.files = []
-    self.audioPostfix = ['aac', 'vorbis', 'mp3', 'm4a', 'opus', 'wav', 'ogg']
+    self.prefix = ''
 
   def getHTML(self, url):
-    if not re.match(r'http|ftp://', url):
-      self.address = 'http://' + url + self.address
-    else:
-      self.address = url + self.address
+    self.address = url
+    prefix = re.findall(r'(.*?)://(.*?)/', url)[0]
+    self.prefix = str(prefix[0]) + '://' + str(prefix[1]) + '/'
 
     print u'opening ' + self.address
     # request = urllib2.Request(self.address)
@@ -33,8 +30,7 @@ class YtbMP3Local:
   def searchLocalExistsAudioFiles(self):
     fileNames = os.listdir(os.path.dirname(os.path.realpath(__file__)))
     for fileName in fileNames:
-      if os.path.splitext(fileName)[1] + '.' in self.audioPostfix:
-        self.files.append(fileName)
+      self.files.append(fileName)
 
   def getAudioFiles(self):
     pattern = re.compile(r'<a href="/(.*?)">(.*?)</a>')
@@ -43,18 +39,18 @@ class YtbMP3Local:
     c = 0
     for item in items:
       c += 1
-      if re.search(re.compile(r'\.'), item[1]) and re.split(re.compile(r'\.'), item[1])[1] in self.audioPostfix and item[1] not in self.files:
+      if re.search(re.compile(r'\.'), item[1]) and item[1] != '../' and item[1] not in self.files:
         # os.popen('wget ' + self.address + '/' + item[0])
         if self.output != '':
-          os.popen('wget -c ' + '-P ' + self.output + ' ' + self.address + item[0])
+          os.popen('wget -c ' + '-P ' + self.output + ' ' + self.prefix + item[0])
         else:
-          os.popen('wget -c ' + self.address + item[0])
-      print str(int(c / float(l) * 100)) + u'%'
+          os.popen('wget -c ' + self.prefix + item[0])
+        print 'Downloading ' + item[1] + '========' + str(int(c / float(l) * 100)) + u'%'
 
 if __name__ == '__main__':
-  opts, args = getopt.getopt(sys.argv[1:], 'p:o:')
+  opts, args = getopt.getopt(sys.argv[1:], 'o:')
   if len(args) > 1 or args == []:
-    print u'Usage: python ytbmp3Local.py [OPTIONS] IP'
+    print u'Usage: python ytbmp3Local.py [OPTIONS] Address'
   else:
     YTB = YtbMP3Local(opts)
     YTB.getHTML(args[0])
