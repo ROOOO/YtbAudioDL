@@ -30,11 +30,16 @@ class getPlayListURLs:
 
   def getURLs(self):
     self.driver.get(self.playlistURL)
-    pattern = re.compile(r'<ul id="channels-browse-content-grid".*?a class.*?title="(.*?)".*?href="(.*?)"', re.S)
     pageHTML = self.driver.page_source
-    print pageHTML
+    pattern = re.compile(r'<ul id="channels-browse-content-grid"(.*?)</ul>', re.S)
     items = re.findall(pattern, pageHTML)
-    print items
+    for item in items:
+      p = re.compile(r'<ul id="channels-browse-content-grid".*?a class.*?title="(.*?)".*?href="(.*?)"', re.S)
+      urls = re.findall(pattern, item)
+      print urls
+
+    # print pageHTML
+    # print items
     self.driver.quit()
 
 if __name__ == '__main__':
