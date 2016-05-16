@@ -12,6 +12,7 @@
 ## Usage
  - On Server Side
     sh ytbAudioDL.sh [OPTIONS] URL [URL ...]
+    python getPlayListURLs PlayListURL
  - On Local Side
     python ytbDL.py [OPTIONS] Protocol://IP
 
@@ -21,11 +22,13 @@
 ## OPTIONS
  - Server
   `-x --audio-quality 0` as default args. You can also add youtube-dl build-in OPTIONS if you want.
+  `-a toBeDownload`      Add a list of urls after running the getPlayListURLs.py.
  - Local
   -p         Server port(default 23333)
   -o         The directory prefix. (The same as `wget -P`)
 
 ## DISCRIPTION
+ 0. [OPTIONAL] Run `python getPlayListURLs.py PlayListURL` first.
  1. Run `ytbAudioDL.sh` on server.
  2. Run `ytbDL.py` on local for downloading audio files you downloaded on server.
 

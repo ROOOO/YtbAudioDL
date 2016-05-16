@@ -19,28 +19,56 @@ class getPlayListURLs:
   def __init__(self, url):
     self.playlistURL = url
     self.urls = []
+    self.names = []
 
     sysstr = platform.system()
     if sysstr == 'Linux':
       self.driver = webdriver.PhantomJS(os.path.join(os.path.split(os.path.realpath(__file__))[0], 'phantomjs'))
     elif sysstr == 'Windows':
-        # self.driver = webdriver.PhantomJS('./phantomjs_win.exe')
+      # self.driver = webdriver.PhantomJS('./phantomjs_win.exe')
       self.driver = webdriver.Chrome()
     self.wait = WebDriverWait(self.driver, 30)
 
   def getURLs(self):
     self.driver.get(self.playlistURL)
+    pattern = re.compile(r'a class.*?title="(.*?)".*?href="(.*?)"', re.S)
     pageHTML = self.driver.page_source
-    pattern = re.compile(r'<ul id="channels-browse-content-grid"(.*?)</ul>', re.S)
+    # print pageHTML
     items = re.findall(pattern, pageHTML)
     for item in items:
-      p = re.compile(r'<ul id="channels-browse-content-grid".*?a class.*?title="(.*?)".*?href="(.*?)"', re.S)
-      urls = re.findall(pattern, item)
-      print urls
-
-    # print pageHTML
-    # print items
+      if re.match(r'\Wplaylist', item[1]):
+        self.names.append(item[0])
+        self.urls.append(item[1])
     self.driver.quit()
+    self.ask()
+
+  def ask(self):
+    input1 = ''
+    while input1 != 'GO':
+      num = 0
+      for item in self.names:
+        num += 1
+        print str(num) + '. ' + item
+      count = len(self.names)
+      input1 = raw_input('Which one you do not want to download?(input GO for continue)')
+      if input1 == 'GO':
+        break
+      try:
+        input1 = int(input1)
+      except:
+        pass
+      else:
+        if input1 > 1 and input1 <= count:
+          self.names.remove(self.names[input1 - 1])
+          self.urls.remove(self.urls[input1 - 1])
+
+    self.save()
+
+  def save(self):
+    file = open('toBeDownload', 'w')
+    for item in self.urls:
+      file.write('https://www.youtube.com' + item + '\n')
+    file.close()
 
 if __name__ == '__main__':
   prefix = u'https://'
