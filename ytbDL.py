@@ -42,9 +42,9 @@ class YtbMP3Local:
       if re.search(re.compile(r'\.'), item[1]) and item[1] != '../' and item[1] not in self.files:
         # os.popen('wget ' + self.address + '/' + item[0])
         if self.output != '':
-          os.popen('wget -c ' + '-P ' + self.output + ' ' + self.prefix + item[0])
+          os.popen('wget -c ' + '-P "' + self.output + '" "' + self.prefix + item[0] + '"')
         else:
-          os.popen('wget -c ' + self.prefix + item[0])
+          os.popen('wget -c "' + self.prefix + item[0] + '"')
         print 'Downloading ' + item[1] + '========' + str(int(c / float(l) * 100)) + u'%'
 
 if __name__ == '__main__':
