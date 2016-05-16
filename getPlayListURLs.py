@@ -30,12 +30,12 @@ class getPlayListURLs:
 
   def getURLs(self):
     self.driver.get(self.playlistURL)
-    pattern = re.compile(r'::before.*?class.*?title="(.*?)".*?href="(.*?)".*?after', re.S)
+    pattern = re.compile(r'a class.*?title="(.*?)".*?href="(.*?)"', re.S)
     pageHTML = self.driver.page_source
     print pageHTML
     items = re.findall(pattern, pageHTML)
     print items
-    self.driver.exit()
+    self.driver.quit()
 
 if __name__ == '__main__':
   prefix = u'https://'
