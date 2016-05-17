@@ -57,7 +57,7 @@ class YtbMP3Local:
       if item[1] == '../':
         continue
       c += 1
-      fileName = (urllib.unquote(re.findall(r'/(.*\.wav)', item[0])))
+      fileName = urllib.unquote(re.findall(r'/(.*\.wav)', item[0])[0])
       if fileName not in self.files:
         # os.popen('wget ' + self.address + '/' + item[0])
         if self.output != '':
