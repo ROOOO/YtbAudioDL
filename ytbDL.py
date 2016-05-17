@@ -62,10 +62,10 @@ class YtbMP3Local:
         # os.popen('wget ' + self.address + '/' + item[0])
         print u'\n************Downloading ' + item[1] + u'========' + str(int(c / float(l) * 100)) + u'%************\n'
         if self.output != '':
-          os.popen('wget -c ' + '-O "' + self.output + '/' + fileName + '.tmp" "' + self.prefix + item[0] + '"')
+          os.popen('axel ' + '-o "' + self.output + '/' + fileName + '.tmp" "' + self.prefix + item[0] + '"')
           os.popen('mv "' + os.path.join(self.output, fileName + '.tmp" "') + os.path.join(self.output, fileName) + '"')
         else:
-          os.popen('wget -c "' + '-O "' + fileName + '.tmp" "' + self.prefix + item[0] + '"')
+          os.popen('axel "' + '-o "' + fileName + '.tmp" "' + self.prefix + item[0] + '"')
           os.popen('mv "' + fileName + '.tmp" "' + fileName + '"')
       else:
         print u'\n************Skip ' + item[1] + u'========' + str(int(c / float(l) * 100)) + u'%************\n'

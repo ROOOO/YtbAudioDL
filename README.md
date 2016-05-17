@@ -5,7 +5,8 @@
 - youtube-dl
 - Python 2.x
 - ffmepg
-- wget
+- axel (`wget` is SLOW!)
+ `sudo apt-get install axel`
 - http-server (Python's build-in HTTPServer is unstable)
  `npm install http-server -g`
 
