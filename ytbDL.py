@@ -34,9 +34,9 @@ class YtbMP3Local:
 
   def searchLocalExistsAudioFiles(self):
     if self.output == '':
-      os.popen('rm *.tmp')
+      os.popen('rm *.tmp*')
     else:
-      os.popen('rm ' + os.path.join(self.output, '*.tmp'))
+      os.popen('rm ' + os.path.join(self.output, '*.tmp*'))
 
     if self.output == '':
       fileNames = os.listdir(os.path.dirname(os.path.realpath(__file__)))
@@ -62,10 +62,10 @@ class YtbMP3Local:
         # os.popen('wget ' + self.address + '/' + item[0])
         print u'\n************Downloading ' + item[1] + u'========' + str(int(c / float(l) * 100)) + u'%************\n'
         if self.output != '':
-          os.popen('axel ' + '-o "' + self.output + '/' + fileName + '.tmp" "' + self.prefix + item[0] + '"')
+          os.popen('screen axel ' + '-o "' + self.output + '/' + fileName + '.tmp" "' + self.prefix + item[0] + '"')
           os.popen('mv "' + os.path.join(self.output, fileName + '.tmp" "') + os.path.join(self.output, fileName) + '"')
         else:
-          os.popen('axel "' + '-o "' + fileName + '.tmp" "' + self.prefix + item[0] + '"')
+          os.popen('screen axel "' + '-o "' + fileName + '.tmp" "' + self.prefix + item[0] + '"')
           os.popen('mv "' + fileName + '.tmp" "' + fileName + '"')
       else:
         print u'\n************Skip ' + item[1] + u'========' + str(int(c / float(l) * 100)) + u'%************\n'
