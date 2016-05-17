@@ -1,3 +1,8 @@
+# coding: utf-8
+
+__author__ = 'King'
+
+import urllib
 import urllib2
 import getopt
 import sys
@@ -29,6 +34,11 @@ class YtbMP3Local:
 
   def searchLocalExistsAudioFiles(self):
     if self.output == '':
+      os.popen('rm *.tmp')
+    else:
+      os.popen('rm ' + os.path.join(self.output, '*.tmp'))
+
+    if self.output == '':
       fileNames = os.listdir(os.path.dirname(os.path.realpath(__file__)))
       for fileName in fileNames:
         self.files.append(fileName)
@@ -38,25 +48,22 @@ class YtbMP3Local:
         self.files.append(fileName)
 
   def getAudioFiles(self):
-    pattern = re.compile(r'<a href="/(.*?)">(.*?)</a>')
+    pattern = re.compile(r'<a href="/(.*?)"></a>')
     items = re.findall(pattern, self.html)
     l = len(items)
     c = 0
-    if self.output == '':
-      os.popen('rm *.tmp')
-    else:
-      os.popen('rm ' + os.path.join(self.output, '*.tmp'))
 
     for item in items:
       c += 1
+      item.append(urllib.unquote(re.findall(r'/(.*?)', item[0])))
       if re.search(re.compile(r'\.'), item[1]) and item[1] != '../' and item[1] not in self.files:
         # os.popen('wget ' + self.address + '/' + item[0])
         if self.output != '':
           os.popen('wget -c ' + '-O "' + self.output + '/' + item[1] + '.tmp" "' + self.prefix + item[0] + '"')
-          os.popen('mv ' + os.path.join(self.output, item[1] + '.tmp ') + os.path.join(self.output, item[1]))
+          os.popen('mv "' + os.path.join(self.output, item[1] + '.tmp" "') + os.path.join(self.output, item[1]) + '"')
         else:
           os.popen('wget -c "' + '-O "' + item[1] + '.tmp" "' + self.prefix + item[0] + '"')
-          os.popen('mv ' + item[1] + '.tmp ' + item[1])
+          os.popen('mv "' + item[1] + '.tmp" "' + item[1] + '"')
         print 'Downloading ' + item[1] + '========' + str(int(c / float(l) * 100)) + u'%'
 
 if __name__ == '__main__':
