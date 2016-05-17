@@ -60,15 +60,15 @@ class YtbMP3Local:
       fileName = urllib.unquote(re.findall(r'/(.*\.wav)', item[0])[0])
       if fileName not in self.files:
         # os.popen('wget ' + self.address + '/' + item[0])
+        print u'\n************Downloading ' + item[1] + u'========' + str(int(c / float(l) * 100)) + u'%************\n'
         if self.output != '':
           os.popen('wget -c ' + '-O "' + self.output + '/' + fileName + '.tmp" "' + self.prefix + item[0] + '"')
           os.popen('mv "' + os.path.join(self.output, fileName + '.tmp" "') + os.path.join(self.output, fileName) + '"')
         else:
           os.popen('wget -c "' + '-O "' + fileName + '.tmp" "' + self.prefix + item[0] + '"')
           os.popen('mv "' + fileName + '.tmp" "' + fileName + '"')
-        print u'Downloading ' + item[1] + u'========' + str(int(c / float(l) * 100)) + u'%'
       else:
-        print u'Skip ' + item[1] + u'========' + str(int(c / float(l) * 100)) + u'%'
+        print u'\n************Skip ' + item[1] + u'========' + str(int(c / float(l) * 100)) + u'%************\n'
 
 if __name__ == '__main__':
   opts, args = getopt.getopt(sys.argv[1:], 'o:')
