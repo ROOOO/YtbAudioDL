@@ -66,7 +66,9 @@ class YtbMP3Local:
         else:
           os.popen('wget -c "' + '-O "' + fileName + '.tmp" "' + self.prefix + item[0] + '"')
           os.popen('mv "' + fileName + '.tmp" "' + fileName + '"')
-        print 'Downloading ' + fileName + '========' + str(int(c / float(l) * 100)) + u'%'
+        print u'Downloading ' + item[1] + u'========' + str(int(c / float(l) * 100)) + u'%'
+      else:
+        print u'Skip ' + item[1] + u'========' + str(int(c / float(l) * 100)) + u'%'
 
 if __name__ == '__main__':
   opts, args = getopt.getopt(sys.argv[1:], 'o:')
