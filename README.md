@@ -37,6 +37,9 @@
  2. PlayList
 
 ## Release Log
+ - v0.2.2
+  1. Enhance Wget procedure.
+  2. Beautify output messages.
  - v0.2.1
   1. fix download bugs.
  - v0.2.0
