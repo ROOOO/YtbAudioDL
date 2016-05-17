@@ -7,6 +7,8 @@
 - ffmepg
 - axel (`wget` is SLOW!)
  `sudo apt-get install axel`
+- screen (For axel verbose)
+ `sudo apt-get install screen`
 - http-server (Python's build-in HTTPServer is unstable)
  `npm install http-server -g`
 
