@@ -1,3 +1,3 @@
 #!/bin/bash
 
-youtube-dl -x --audio-quality 0 --audio-format wav --ignore-errors $@
+youtube-dl -x --audio-quality 0 --audio-format wav --ignore-errors --external-downloader axel $@

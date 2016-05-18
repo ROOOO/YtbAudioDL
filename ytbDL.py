@@ -55,6 +55,7 @@ class YtbMP3Local:
 
     for item in items:
       if item[1] == '../':
+        l -= 1
         continue
       c += 1
       fileName = urllib.unquote(re.findall(r'/(.*\.wav)', item[0])[0])
