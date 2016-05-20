@@ -7,17 +7,20 @@
 - ffmepg
 - [gdrive](https://github.com/prasmussen/gdrive)
  - It might be [PyDrive](https://github.com/googledrive/PyDrive) later. :)
+- screen
+ - `apt-get install screen` On Ubuntu.
 
 ## Usage
   python getPlayListURLs PlayListURL
   sh ytbAudioDL.sh [OPTIONS] URL [URL ...]
+   - file `parent` for settting parentID on Google Drive.
 
 ### Notes
  - URL can be a playlist.
 
 ## OPTIONS
   `-x --audio-quality 0 --audio-format 'aac'` as default args. You can also add youtube-dl build-in OPTIONS if you want.
-  `-a toBeDownload`      Add a list of urls after running the getPlayListURLs.py.
+  `-a toBeDownload`      Add a list of urls after running `getPlayListURLs.py`.
 
 ## DISCRIPTION
  0. [OPTIONAL] Run `python getPlayListURLs.py PlayListURL` first.
