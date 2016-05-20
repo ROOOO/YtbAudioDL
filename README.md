@@ -1,45 +1,33 @@
 # DISCRIPTION
- Download Youtube videos and convert them to Audio Format On your own Server. Then, download them easily.
+ Download Youtube audios and upload to Google Drive automatically. Then, download them easily from Google Drive.
 
 ## Requirements
 - youtube-dl
 - Python 2.x
 - ffmepg
-- axel (`wget` is SLOW!)
- `sudo apt-get install axel`
-- screen (For axel verbose)
- `sudo apt-get install screen`
-- http-server (Python's build-in HTTPServer is unstable)
- `npm install http-server -g`
+- [gdrive](https://github.com/prasmussen/gdrive)
+ - It might be [PyDrive](https://github.com/googledrive/PyDrive) later. :)
 
 ## Usage
- - On Server Side
-    sh ytbAudioDL.sh [OPTIONS] URL [URL ...]
-    python getPlayListURLs PlayListURL
- - On Local Side
-    python ytbDL.py [OPTIONS] Protocol://IP
+  python getPlayListURLs PlayListURL
+  sh ytbAudioDL.sh [OPTIONS] URL [URL ...]
 
 ### Notes
  - URL can be a playlist.
 
 ## OPTIONS
- - Server
   `-x --audio-quality 0 --audio-format 'aac'` as default args. You can also add youtube-dl build-in OPTIONS if you want.
   `-a toBeDownload`      Add a list of urls after running the getPlayListURLs.py.
- - Local
-  -p         Server port(default 23333)
-  -o         The directory prefix. (The same as `wget -P`)
 
 ## DISCRIPTION
  0. [OPTIONAL] Run `python getPlayListURLs.py PlayListURL` first.
  1. Run `ytbAudioDL.sh` on server.
- 2. Run `ytbDL.py` on local for downloading audio files you downloaded on server.
 
 ## TODO
- 1. Delete audio files which you'd downloaded from your own server.
- 2. PlayList
 
 ## Release Log
+ - v0.3.0
+  Using Google Drive for data storage.
  - v0.2.2
   1. Enhance Wget procedure.
   2. Beautify output messages.
