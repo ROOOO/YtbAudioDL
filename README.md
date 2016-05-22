@@ -21,6 +21,7 @@
 ## OPTIONS
   `-x --audio-quality 0 --audio-format 'aac'` as default args. You can also add youtube-dl build-in OPTIONS if you want.
   `-a toBeDownload`      Add a list of urls after running `getPlayListURLs.py`.
+  `-o DIR`              For example: -o "./%(uploader)s/%(title)s-%(id)s.%(ext)s"
 
 ## DISCRIPTION
  0. [OPTIONAL] Run `python getPlayListURLs.py PlayListURL` first.
