@@ -59,7 +59,7 @@ class getPlayListURLs:
       except:
         pass
       else:
-        if input1 > 1 and input1 <= count:
+        if input1 >= 1 and input1 <= count:
           self.names.remove(self.names[input1 - 1])
           self.urls.remove(self.urls[input1 - 1])
 
