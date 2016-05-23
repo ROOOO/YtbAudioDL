@@ -5,6 +5,7 @@
 *.part
 *.mp3
 *.out
+*.gd
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
